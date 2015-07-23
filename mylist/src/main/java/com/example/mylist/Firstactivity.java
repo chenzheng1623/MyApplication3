@@ -27,6 +27,7 @@ public class Firstactivity extends AppCompatActivity implements ItemFragment.OnF
             getFragmentManager().beginTransaction()
                    .replace(R.id.frame_layout,listfragment).commit();
         }
+        Log.i(TAG, "onCreate ");
 
     }
 
