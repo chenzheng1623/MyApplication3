@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <color name="material_blue_500">#009688</color>
+    <color name="material_blue_700">#00796B</color>
+    <color name="material_green_A200">#FD87A9</color>
+
+    <array name="item" id="name">
+        <item >成绩查询</item>
+        <item >考试查询</item>
+        <item >设置</item>
+        <item >关于</item>
+
+    </array>
+</resources>
