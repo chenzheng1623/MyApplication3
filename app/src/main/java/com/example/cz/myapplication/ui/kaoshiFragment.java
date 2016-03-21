@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class kaoshiFragment extends Fragment {
 
-    public  String  url="http://jw3.nwnu.edu.cn:7001/WebEducation/examservlet?action=S&userid=94706";
+    public String url = "http://jw3.nwnu.edu.cn:7001/WebEducation/examservlet?action=S&userid=94706";
     private RecyclerView mRecyclerView;
     private CardView mCardView;
     private myAdapter myadapter;
@@ -40,10 +40,10 @@ public class kaoshiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view=  inflater.inflate(R.layout.kaoshi_view,null,false);
-        mRecyclerView= (RecyclerView)view.findViewById(R.id.main_recycleview);
+        View view = inflater.inflate(R.layout.kaoshi_view, null, false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycleview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mSwipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -71,17 +71,17 @@ public class kaoshiFragment extends Fragment {
 
     //jsoup解析html
     private List<mInfo> pareseHtml(String s) {
-        List<mInfo> mInfoList=new ArrayList<>();
-        Document doc= Jsoup.parse(s);
-        Elements trs= doc.select("tr");
-        for (int i=1 ; i<trs.size()-1; i++){
-            mInfo mInfo=new mInfo();
-            Elements tds=trs.get(i).select("td");
-            for (int j=0 ;j<tds.size();j++){
+        List<mInfo> mInfoList = new ArrayList<>();
+        Document doc = Jsoup.parse(s);
+        Elements trs = doc.select("tr");
+        for (int i = 1; i < trs.size() - 1; i++) {
+            mInfo mInfo = new mInfo();
+            Elements tds = trs.get(i).select("td");
+            for (int j = 0; j < tds.size(); j++) {
                 //  Log.i(TAG, "----"+tds.get(j).text());
                 //Log.i(TAG, tds.get(j).toString());
-                String content=tds.get(j).text();
-                switch (j){
+                String content = tds.get(j).text();
+                switch (j) {
                     case 0:
                         mInfo.setNumber(content);
                         break;
@@ -122,23 +122,23 @@ public class kaoshiFragment extends Fragment {
 
     //使用okhttp访问网络
     private String Okhttp(String param) {
-        String content="";
-        OkHttpClient client=new OkHttpClient();Request Request=new Request.Builder().url(param).build();
+        String content = "";
+        OkHttpClient client = new OkHttpClient();
+        Request Request = new Request.Builder().url(param).build();
         Response Response = null;
         try {
             Response = client.newCall(Request).execute();
-            if (Response.isSuccessful()){
+            if (Response.isSuccessful()) {
                 return Response.body().string();
             }
         } catch (IOException e) {
-            Log.i(MainActivity.TAG, e.getMessage()) ;
+            Log.i(MainActivity.TAG, e.getMessage());
             return null;
         }
-
         return content;
     }
 
-    class  myasync extends AsyncTask<String,Void,String> {
+    class myasync extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -150,24 +150,25 @@ public class kaoshiFragment extends Fragment {
             super.onPostExecute(s);
             List<mInfo> mInfoList = pareseHtml(s);
             Log.i(MainActivity.TAG, mInfoList.toString());
-            myadapter=new myAdapter();
+            myadapter = new myAdapter();
             myadapter.setlist(mInfoList);
             mRecyclerView.setAdapter(myadapter);
         }
     }
 
-    class  myAdapter extends RecyclerView.Adapter<myAdapter.MyviewHolder>{
-        private    List<mInfo> mInfoList;
+    class myAdapter extends RecyclerView.Adapter<myAdapter.MyviewHolder> {
+        private List<mInfo> mInfoList;
 
-        public void setlist(List<mInfo> mInfoList){
-            this.mInfoList=mInfoList;
+        public void setlist(List<mInfo> mInfoList) {
+            this.mInfoList = mInfoList;
             notifyDataSetChanged();
         }
+
         @Override
         public MyviewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            CardView mCardView= (android.support.v7.widget.CardView) LayoutInflater.from(getActivity())
-                    .inflate(R.layout.kaoshi_item_view,viewGroup,false);
-            MyviewHolder holder=new MyviewHolder(mCardView);
+            CardView mCardView = (android.support.v7.widget.CardView) LayoutInflater.from(getActivity())
+                    .inflate(R.layout.kaoshi_item_view, viewGroup, false);
+            MyviewHolder holder = new MyviewHolder(mCardView);
             return holder;
         }
 
@@ -192,7 +193,7 @@ public class kaoshiFragment extends Fragment {
             return mInfoList.size();
         }
 
-        class MyviewHolder extends RecyclerView.ViewHolder{
+        class MyviewHolder extends RecyclerView.ViewHolder {
 
             TextView number;
             TextView ser;
@@ -207,16 +208,16 @@ public class kaoshiFragment extends Fragment {
 
             public MyviewHolder(View view) {
                 super(view);
-                number= (TextView) view.findViewById(R.id.number);
-                ser= (TextView) view.findViewById(R.id.ser);
-                name= (TextView) view.findViewById(R.id.name);
-                teacher= (TextView) view.findViewById(R.id.teacher);
-                style= (TextView) view.findViewById(R.id.style);
-                date= (TextView) view.findViewById(R.id.date);
-                time= (TextView) view.findViewById(R.id.time);
-                kaocha= (TextView) view.findViewById(R.id.kaochang);
-                zuowei= (TextView) view.findViewById(R.id.zuowei);
-                huankao= (TextView) view.findViewById(R.id.huankao);
+                number = (TextView) view.findViewById(R.id.number);
+                ser = (TextView) view.findViewById(R.id.ser);
+                name = (TextView) view.findViewById(R.id.name);
+                teacher = (TextView) view.findViewById(R.id.teacher);
+                style = (TextView) view.findViewById(R.id.style);
+                date = (TextView) view.findViewById(R.id.date);
+                time = (TextView) view.findViewById(R.id.time);
+                kaocha = (TextView) view.findViewById(R.id.kaochang);
+                zuowei = (TextView) view.findViewById(R.id.zuowei);
+                huankao = (TextView) view.findViewById(R.id.huankao);
             }
         }
 

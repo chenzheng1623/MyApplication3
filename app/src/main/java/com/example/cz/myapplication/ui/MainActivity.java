@@ -22,7 +22,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * base activity contains four
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static String TAG = "TAG";
